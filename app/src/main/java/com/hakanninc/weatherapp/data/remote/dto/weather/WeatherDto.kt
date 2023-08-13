@@ -20,12 +20,6 @@ data class WeatherDto(
     val wind: Wind
 )
 
-fun WeatherDto.toMovieList() :List<WeatherModel> {
+fun WeatherDto.toWeatherList() :List<WeatherModel> {
     return weather.map { weather -> WeatherModel(weather.description,weather.icon) }
-}
-fun Main.toWeatherDetail() : WeatherDetailModel {
-    return WeatherDetailModel(feels_like,humidity,pressure,temp,temp_max,temp_min)
-}
-fun Sys.toName() : WeatherNameModel {
-    return WeatherNameModel(country)
 }
