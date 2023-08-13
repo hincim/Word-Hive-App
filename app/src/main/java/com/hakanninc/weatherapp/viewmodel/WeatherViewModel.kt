@@ -30,7 +30,7 @@ class WeatherViewModel @Inject constructor(
         get() = _stateDetail
 
     init {
-        getWeatherInfo("Konya")
+        getWeatherInfo("Turkey")
     }
 
     private var job: Job? = null
@@ -54,7 +54,7 @@ class WeatherViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
-    private fun getWeatherInfo(city: String){
+    fun getWeatherInfo(city: String){
 
         job?.cancel()
 
