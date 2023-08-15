@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/drawable/communication.xml" value="0.1005" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/drawable/radius.xml" value="0.1" />
-        <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/blank_fragment.xml" value="0.1796875" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/fragment_two.xml" value="0.1796875" />
+        <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/menu/bottom_bar_menu.xml" value="0.1796875" />
+        <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/menu/menu.xml" value="0.1796875" />
       </map>
     </option>
   </component>
