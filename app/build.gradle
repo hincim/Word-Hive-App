@@ -11,6 +11,7 @@ android {
 
     buildFeatures{
         viewBinding true
+        dataBinding true
     }
     defaultConfig {
         applicationId "com.hakanninc.weatherapp"
@@ -68,4 +69,11 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     kapt 'com.github.bumptech.glide:compiler:4.14.2'
+
+    //Room
+    implementation "androidx.room:room-runtime:2.5.0"
+    kapt "androidx.room:room-compiler:2.5.0"
+    //Coroutine
+    implementation "androidx.room:room-ktx:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 }

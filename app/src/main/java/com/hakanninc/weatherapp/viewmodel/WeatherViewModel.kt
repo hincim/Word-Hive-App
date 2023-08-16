@@ -9,6 +9,7 @@ import com.hakanninc.weatherapp.domain.use_case.GetWeatherUseCase
 import com.hakanninc.weatherapp.state.WeatherDetailState
 import com.hakanninc.weatherapp.state.WeatherState
 import com.hakanninc.weatherapp.util.Resource
+import com.hakanninc.weatherapp.view.ToolsFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
@@ -21,6 +22,7 @@ class WeatherViewModel @Inject constructor(
     private val getWeatherInfoUseCase: GetWeatherInfoUseCase
 ) : ViewModel() {
 
+
     private val _state = MutableLiveData<WeatherState>()
     val state: LiveData<WeatherState>
         get() = _state
@@ -30,7 +32,7 @@ class WeatherViewModel @Inject constructor(
         get() = _stateDetail
 
     init {
-        getWeatherInfo("Turkey")
+            getWeatherInfo("Konya")
     }
 
     private var job: Job? = null

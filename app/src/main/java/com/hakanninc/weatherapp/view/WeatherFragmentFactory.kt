@@ -10,7 +10,7 @@ class WeatherFragmentFactory @Inject constructor(
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when(className){
-            HomeFragment::class.java.name -> HomeFragment()
+            ToolsFragment::class.java.name -> ToolsFragment()
             else -> super.instantiate(classLoader, className)
         }
     }

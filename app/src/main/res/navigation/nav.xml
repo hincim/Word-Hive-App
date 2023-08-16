@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
     app:startDestination="@id/homeFragment">
-
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.hakanninc.weatherapp.view.HomeFragment"
+        android:label="fragment_tools"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/toolsFragment"
+        android:name="com.hakanninc.weatherapp.view.ToolsFragment"
         android:label="HomeFragment" />
     <fragment
-        android:id="@+id/twoFragment"
+        android:id="@+id/commFragment"
         android:name="com.hakanninc.weatherapp.view.CommFragment"
-        android:label="fragment_two"
+        android:label="fragment_comm"
         tools:layout="@layout/fragment_comm" />
 </navigation>
