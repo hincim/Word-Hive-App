@@ -36,5 +36,12 @@ class WordsAddViewModel(application: Application): BaseViewModel(application) {
 
     }
 
+    fun deleteWords(words: Words){
+       launch {
+           val dao = WordsDatabase(getApplication()).wordsDao()
+           dao.deleteWords(words)
+       }
+    }
+
 
 }

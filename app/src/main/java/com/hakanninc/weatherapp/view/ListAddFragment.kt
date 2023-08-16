@@ -12,7 +12,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hakanninc.weatherapp.R
 import com.hakanninc.weatherapp.adapter.WordsAdapter
 import com.hakanninc.weatherapp.databinding.FragmentHomeBinding
@@ -27,8 +29,25 @@ class ListAddFragment : Fragment(R.layout.fragment_list_add) {
     private val wordsAdapter: WordsAdapter = WordsAdapter(arrayListOf())
     private lateinit var viewModel: WordsAddViewModel
 
+    private val swipeCallBack = object : ItemTouchHelper.SimpleCallback(0,
+        ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            return true
+        }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val layoutPosition = viewHolder.layoutPosition
+            val selectedWords = wordsAdapter.wordsList[layoutPosition]
+            viewModel.deleteWords(selectedWords)
+            viewModel.getDataFromSQLite()
+        }
+
+    }
+        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentListAddBinding.bind(view)
@@ -38,8 +57,9 @@ class ListAddFragment : Fragment(R.layout.fragment_list_add) {
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
-        binding.rv.layoutManager = LinearLayoutManager(context)
-        binding.rv.adapter = wordsAdapter
+            binding.rv.adapter = wordsAdapter
+            binding.rv.layoutManager = LinearLayoutManager(context)
+            ItemTouchHelper(swipeCallBack).attachToRecyclerView(binding.rv)
 
         viewModel.getDataFromSQLite()
 
@@ -53,5 +73,10 @@ class ListAddFragment : Fragment(R.layout.fragment_list_add) {
         binding.fab.setOnClickListener {
             Navigation.findNavController(it).navigate(ListAddFragmentDirections.actionListAddFragmentToWordAddFragment())
         }
+    }
+
+    override fun onDestroy() {
+        _fragmentBinding = null
+        super.onDestroy()
     }
 }

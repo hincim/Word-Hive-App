@@ -1,6 +1,7 @@
 package com.hakanninc.weatherapp.data.room
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.hakanninc.weatherapp.domain.model.Words
@@ -17,6 +18,6 @@ interface WordsDao {
     @Query("SELECT * FROM words where uuid = :wordsId")
     suspend fun getWords(wordsId: Int) : Words
 
-    @Query("DELETE FROM words")
-    suspend fun deleteAllWords()
+    @Delete
+    suspend fun deleteWords(words: Words)
 }
