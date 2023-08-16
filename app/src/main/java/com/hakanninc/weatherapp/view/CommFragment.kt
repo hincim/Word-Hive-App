@@ -3,6 +3,7 @@ package com.hakanninc.weatherapp.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.hakanninc.weatherapp.R
 import com.hakanninc.weatherapp.databinding.FragmentCommBinding
 

@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_home"
+            android:id="@+id/toolbar_comm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -36,8 +36,8 @@
             android:layout_height="45dp"
             android:elevation="10dp"
             android:src="@drawable/app_logo"
-            app:layout_constraintEnd_toEndOf="@+id/toolbar_home"
-            app:layout_constraintStart_toStartOf="@+id/toolbar_home"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar_comm"
+            app:layout_constraintStart_toStartOf="@+id/toolbar_comm"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
