@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/listAddFragment"
-        android:name="com.hakanninc.weatherapp.view.ListAddFragment"
+        android:name="com.hakanninc.weatherapp.view.WordsFragment"
         android:label="fragment_list_add"
-        tools:layout="@layout/fragment_list_add" >
+        tools:layout="@layout/fragment_words" >
         <action
             android:id="@+id/action_listAddFragment_to_wordAddFragment"
             app:destination="@id/wordAddFragment" />

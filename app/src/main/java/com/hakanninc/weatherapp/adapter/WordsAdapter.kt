@@ -6,11 +6,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.hakanninc.weatherapp.R
 import com.hakanninc.weatherapp.databinding.ItemWordRowBinding
 import com.hakanninc.weatherapp.domain.model.Words
-import com.hakanninc.weatherapp.viewmodel.WordsAddViewModel
 
 class WordsAdapter: RecyclerView.Adapter<WordsAdapter.WordsViewHolder>(){
 

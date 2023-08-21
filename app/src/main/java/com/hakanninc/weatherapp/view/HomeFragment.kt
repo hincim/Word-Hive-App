@@ -1,15 +1,10 @@
 package com.hakanninc.weatherapp.view
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.fragment.findNavController
-import com.hakanninc.weatherapp.ListActivity
+import com.hakanninc.weatherapp.WordActivity
 import com.hakanninc.weatherapp.R
 import com.hakanninc.weatherapp.databinding.FragmentHomeBinding
 
@@ -25,7 +20,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.card.setOnClickListener {
 
-            startActivity(Intent(it.context, ListActivity::class.java))
+            startActivity(Intent(it.context, WordActivity::class.java))
         }
     }
 

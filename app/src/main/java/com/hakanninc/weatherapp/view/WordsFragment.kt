@@ -1,9 +1,14 @@
 package com.hakanninc.weatherapp.view
 
 import android.os.Bundle
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -12,15 +17,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hakanninc.weatherapp.R
 import com.hakanninc.weatherapp.adapter.WordsAdapter
-import com.hakanninc.weatherapp.databinding.FragmentListAddBinding
-import com.hakanninc.weatherapp.viewmodel.WordsAddViewModel
+import com.hakanninc.weatherapp.databinding.FragmentWordsBinding
+import com.hakanninc.weatherapp.viewmodel.WordsViewModel
 
 
-class ListAddFragment : Fragment(R.layout.fragment_list_add) {
+class WordsFragment : Fragment(R.layout.fragment_words), SearchView.OnQueryTextListener {
 
-    private var _fragmentBinding: FragmentListAddBinding? = null
+    private var _fragmentBinding: FragmentWordsBinding? = null
     private val wordsAdapter: WordsAdapter = WordsAdapter()
-    private lateinit var viewModel: WordsAddViewModel
+    private lateinit var viewModel: WordsViewModel
 
     private val swipeCallBack = object : ItemTouchHelper.SimpleCallback(
         0,
@@ -45,9 +50,9 @@ class ListAddFragment : Fragment(R.layout.fragment_list_add) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[WordsAddViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[WordsViewModel::class.java]
 
-        val binding = FragmentListAddBinding.bind(view)
+        val binding = FragmentWordsBinding.bind(view)
         _fragmentBinding = binding
         binding.toolbar.title = "Kelimeler"
 
@@ -61,8 +66,25 @@ class ListAddFragment : Fragment(R.layout.fragment_list_add) {
 
         binding.fab.setOnClickListener {
             Navigation.findNavController(it)
-                .navigate(ListAddFragmentDirections.actionListAddFragmentToWordAddFragment())
+                .navigate(WordsFragmentDirections.actionListAddFragmentToWordAddFragment())
         }
+
+        binding.toolbar.title = "Kelimeler"
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
+        requireActivity().addMenuProvider(object : MenuProvider{
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_search,menu)
+                val item = menu.findItem(R.id.action_search).actionView as SearchView
+                item.setOnQueryTextListener(this@WordsFragment)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return false
+            }
+
+        },viewLifecycleOwner,Lifecycle.State.RESUMED)
+
     }
 
     private fun subscribeToObserves() {
@@ -79,5 +101,22 @@ class ListAddFragment : Fragment(R.layout.fragment_list_add) {
     override fun onDestroy() {
         _fragmentBinding = null
         super.onDestroy()
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null) {
+            if (query.isEmpty())
+                Log.e("submit", query.toString())
+            viewModel.getWordBySearch(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        Log.e("change", newText.toString())
+        if (newText != null) {
+            viewModel.getWordBySearch(newText)
+        }
+        return true
     }
 }

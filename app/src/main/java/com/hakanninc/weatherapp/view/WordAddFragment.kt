@@ -1,25 +1,20 @@
 package com.hakanninc.weatherapp.view
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.hakanninc.weatherapp.R
-import com.hakanninc.weatherapp.databinding.FragmentHomeBinding
 import com.hakanninc.weatherapp.databinding.FragmentWordAddBinding
 import com.hakanninc.weatherapp.domain.model.Words
-import com.hakanninc.weatherapp.viewmodel.WordsAddViewModel
+import com.hakanninc.weatherapp.viewmodel.WordsViewModel
 
 class WordAddFragment : Fragment(R.layout.fragment_word_add) {
 
     private var _fragmentBinding: FragmentWordAddBinding? = null
-    private lateinit var viewModel: WordsAddViewModel
+    private lateinit var viewModel: WordsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +25,7 @@ class WordAddFragment : Fragment(R.layout.fragment_word_add) {
         val binding = FragmentWordAddBinding.bind(view)
         _fragmentBinding = binding
 
-        viewModel = ViewModelProvider(requireActivity())[WordsAddViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[WordsViewModel::class.java]
 
        binding.buttonSave.setOnClickListener {
            val eng = binding.editTextEng.text.toString()

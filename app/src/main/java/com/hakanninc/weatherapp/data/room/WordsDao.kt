@@ -15,6 +15,9 @@ interface WordsDao {
     @Query("SELECT * FROM words")
     suspend fun getAllWords() : List<Words>
 
+    @Query("SELECT * FROM words WHERE eng LIKE '%' || :word ||'%' OR tr LIKE '%' || :word ||'%'")
+    suspend fun getWordBySearch(word: String): List<Words>
+
     @Delete
     suspend fun deleteWords(words: Words)
 }

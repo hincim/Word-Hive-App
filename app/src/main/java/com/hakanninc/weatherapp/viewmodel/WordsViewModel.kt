@@ -6,7 +6,7 @@ import com.hakanninc.weatherapp.data.room.WordsDatabase
 import com.hakanninc.weatherapp.domain.model.Words
 import kotlinx.coroutines.launch
 
-class WordsAddViewModel(application: Application): BaseViewModel(application) {
+class WordsViewModel(application: Application): BaseViewModel(application) {
 
     val words = MutableLiveData<List<Words>>()
 
@@ -34,6 +34,13 @@ class WordsAddViewModel(application: Application): BaseViewModel(application) {
             showWords(words)
         }
 
+    }
+
+    fun getWordBySearch(word: String){
+        launch {
+            val words = WordsDatabase(getApplication()).wordsDao().getWordBySearch(word)
+            showWords(words)
+        }
     }
 
     fun deleteWords(words: Words){

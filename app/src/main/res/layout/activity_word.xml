@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ListActivity">
+    tools:context=".WordActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_list_fragment"
