@@ -3,7 +3,10 @@ package com.hakanninc.weatherapp.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.hakanninc.weatherapp.R
 import com.hakanninc.weatherapp.databinding.FragmentCommBinding
 

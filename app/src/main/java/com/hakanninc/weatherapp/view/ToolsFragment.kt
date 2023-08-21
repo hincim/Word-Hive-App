@@ -3,6 +3,8 @@ package com.hakanninc.weatherapp.view
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -10,6 +12,7 @@ import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.hakanninc.weatherapp.R
 import com.hakanninc.weatherapp.databinding.FragmentToolsBinding
 import com.hakanninc.weatherapp.viewmodel.WeatherViewModel
@@ -61,6 +64,8 @@ class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextL
 
             getData()
 
+        println(Calendar.HOUR_OF_DAY)
+
         _fragmentBinding.swipeRefreshLayout.setOnRefreshListener {
             _fragmentBinding.progressBar.visibility = View.VISIBLE
             _fragmentBinding.title.visibility = View.GONE
@@ -98,16 +103,14 @@ class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextL
                         _fragmentBinding.title.text = "Şehir: ${data.weather?.name}"
                         _fragmentBinding.degree.text = "Hava sıcaklığı: ${data.weather?.main?.temp.toString().take(2)}°"
                         _fragmentBinding.description.text = "Hissedilen sıcaklık: ${data.weather?.main?.feels_like.toString().take(2)}°"
-                        if (data.weather?.weather?.get(0)?.id!! < 600 && Calendar.HOUR_OF_DAY>= 19 || Calendar.HOUR_OF_DAY <=5){
+                       /* if (Calendar.HOUR_OF_DAY>= 19 || Calendar.HOUR_OF_DAY <=5){
                             _fragmentBinding.image.setImageResource(R.drawable.night)
-                        }else if (data.weather.weather[0].id< 600 ){
+                        }else if (data.weather?.weather?.get(0)?.id!!< 600 ){
                             _fragmentBinding.image.setImageResource(R.drawable.cloudy)
-                        }else if (Calendar.HOUR_OF_DAY>= 19 || Calendar.HOUR_OF_DAY <=5){
-                            _fragmentBinding.image.setImageResource(R.drawable.night)
                         }
                         else{
                             _fragmentBinding.image.setImageResource(R.drawable.sunny)
-                        }
+                        }*/
                     }
                 }
 
