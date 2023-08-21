@@ -2,18 +2,12 @@ package com.hakanninc.weatherapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
+import android.os.CountDownTimer
 import android.view.View
-import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.hakanninc.weatherapp.databinding.ActivityMainBinding
-import com.hakanninc.weatherapp.view.HomeFragment
-import com.hakanninc.weatherapp.view.WeatherFragmentFactory
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity: AppCompatActivity(){
@@ -37,6 +31,17 @@ class MainActivity: AppCompatActivity(){
         NavigationUI.setupWithNavController(binding.bottomNav, navHostFragment.navController)
 
 
+        binding.bottomNav.visibility = View.GONE
+        object : CountDownTimer(2000,1000){
+            override fun onTick(p0: Long) {
+
+            }
+
+            override fun onFinish() {
+                binding.bottomNav.visibility = View.VISIBLE
+            }
+
+        }.start()
     }
 }
 

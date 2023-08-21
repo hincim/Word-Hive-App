@@ -13,7 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherApp">
         <activity
-            android:name=".view.ListActivity"
+            android:name=".view.CustomSplashActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ScrollingActivity"
+            android:exported="false"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/Theme.WeatherApp.NoActionBar" />
+        <activity
+            android:name=".ListActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

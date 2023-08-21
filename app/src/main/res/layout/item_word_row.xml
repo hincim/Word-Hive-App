@@ -5,17 +5,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_row"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_margin="5dp"
-            app:cardCornerRadius="8dp">
+            android:background="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -23,6 +27,7 @@
                     android:id="@+id/textViewTr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
+                    android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"

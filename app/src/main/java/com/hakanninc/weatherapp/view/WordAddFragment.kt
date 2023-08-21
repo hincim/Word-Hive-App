@@ -1,10 +1,12 @@
 package com.hakanninc.weatherapp.view
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -32,14 +34,22 @@ class WordAddFragment : Fragment(R.layout.fragment_word_add) {
 
        binding.buttonSave.setOnClickListener {
            val eng = binding.editTextEng.text.toString()
-           println(eng)
            val tr = binding.editTextTurkish.text.toString()
-           val listWords = arrayListOf<Words>()
-           val words = Words(eng,tr)
-           listWords.add(words)
-           viewModel.saveInSQLite(listWords)
-           Navigation.findNavController(it).popBackStack()
+           if (eng.isEmpty() || tr.isEmpty()){
+               Toast.makeText(context,"Boş değer girilmemeli",Toast.LENGTH_SHORT).show()
+           }else{
+               val listWords = arrayListOf<Words>()
+               val words = Words(eng,tr)
+               listWords.add(words)
+               viewModel.saveInSQLite(listWords)
+               Navigation.findNavController(it).popBackStack()
+           }
+
        }
 
+    }
+    override fun onDestroy() {
+        _fragmentBinding = null
+        super.onDestroy()
     }
 }

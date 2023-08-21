@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rootLayout"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -21,17 +22,18 @@
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
-            android:layout_width="413dp"
-            android:layout_height="572dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_tools"
             tools:context=".view.MainActivity">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
+                android:background="@color/white"
                 android:layout_height="match_parent">
 
                 <androidx.cardview.widget.CardView
@@ -39,6 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    android:background="@color/white"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     app:cardCornerRadius="8dp"
@@ -50,6 +53,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/white"
                         android:orientation="vertical"
                         android:padding="16dp">
 
@@ -79,12 +83,14 @@
                             android:id="@+id/degree"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
                             android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
                             android:textSize="14sp" />
 
 
@@ -94,17 +100,17 @@
 
                 <TextView
                     android:id="@+id/textViewErr"
+                    android:layout_width="157dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="87dp"
+                    android:text="Veri yok"
                     android:textAlignment="center"
                     android:textSize="20sp"
-                    android:layout_width="181dp"
-                    android:layout_height="36dp"
-                    android:layout_marginBottom="215dp"
-                    android:text="Veri yok"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

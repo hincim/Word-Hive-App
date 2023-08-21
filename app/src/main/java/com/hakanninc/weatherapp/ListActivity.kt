@@ -1,4 +1,4 @@
-package com.hakanninc.weatherapp.view
+package com.hakanninc.weatherapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

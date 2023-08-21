@@ -36,6 +36,7 @@
             android:layout_height="45dp"
             android:elevation="10dp"
             android:src="@drawable/app_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar_comm"
             app:layout_constraintEnd_toEndOf="@+id/toolbar_comm"
             app:layout_constraintStart_toStartOf="@+id/toolbar_comm"
             app:layout_constraintTop_toTopOf="parent" />
@@ -56,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
+            android:textColor="@android:color/black"
             android:text="Görüş ve öneri için iletişime geçin"
             android:textAlignment="center"
             android:textSize="20sp"
@@ -69,6 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textColor="@android:color/black"
             android:text="hakanincim4@gmail.com"
             android:textSize="16sp"
             android:textStyle="bold"

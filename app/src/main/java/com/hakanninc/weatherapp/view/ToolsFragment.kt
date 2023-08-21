@@ -3,7 +3,6 @@ package com.hakanninc.weatherapp.view
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -13,15 +12,13 @@ import androidx.lifecycle.*
 import androidx.lifecycle.Observer
 import com.hakanninc.weatherapp.R
 import com.hakanninc.weatherapp.databinding.FragmentToolsBinding
-import com.hakanninc.weatherapp.state.WeatherDetailState
 import com.hakanninc.weatherapp.viewmodel.WeatherViewModel
 import java.util.*
-import kotlin.math.log
 
 
 class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextListener {
 
-    private lateinit var fragmentBinding: FragmentToolsBinding
+    private lateinit var _fragmentBinding: FragmentToolsBinding
     private lateinit var viewModel: WeatherViewModel
 
     override fun onCreateView(
@@ -30,10 +27,10 @@ class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextL
         savedInstanceState: Bundle?
     ): View {
 
-        fragmentBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_tools,container,false)
+        _fragmentBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_tools,container,false)
 
-        fragmentBinding.toolbarTools.title = "Araçlar"
-        (activity as AppCompatActivity).setSupportActionBar(fragmentBinding.toolbarTools)
+        _fragmentBinding.toolbarTools.title = "Araçlar"
+        (activity as AppCompatActivity).setSupportActionBar(_fragmentBinding.toolbarTools)
 
         requireActivity().addMenuProvider(object :MenuProvider{
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -48,7 +45,7 @@ class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextL
             }
 
         },viewLifecycleOwner, Lifecycle.State.RESUMED)
-        return fragmentBinding.root
+        return _fragmentBinding.root
 
 
     }
@@ -64,13 +61,13 @@ class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextL
 
             getData()
 
-        fragmentBinding.swipeRefreshLayout.setOnRefreshListener {
-            fragmentBinding.progressBar.visibility = View.VISIBLE
-            fragmentBinding.title.visibility = View.GONE
-            fragmentBinding.degree.visibility = View.GONE
-            fragmentBinding.description.visibility = View.GONE
+        _fragmentBinding.swipeRefreshLayout.setOnRefreshListener {
+            _fragmentBinding.progressBar.visibility = View.VISIBLE
+            _fragmentBinding.title.visibility = View.GONE
+            _fragmentBinding.degree.visibility = View.GONE
+            _fragmentBinding.description.visibility = View.GONE
             getData()
-            fragmentBinding.swipeRefreshLayout.isRefreshing = false
+            _fragmentBinding.swipeRefreshLayout.isRefreshing = false
         }
     }
 
@@ -78,38 +75,38 @@ class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextL
         viewModel.stateDetail.observe(viewLifecycleOwner, Observer {
 
             it?.let { data ->
-                fragmentBinding.let {
+                _fragmentBinding.let {
                     if (data.isLoading){
-                        fragmentBinding.progressBar.visibility = View.VISIBLE
-                        fragmentBinding.card.visibility = View.VISIBLE
-                        fragmentBinding.title.visibility = View.GONE
-                        fragmentBinding.degree.visibility = View.GONE
-                        fragmentBinding.description.visibility = View.GONE
-                        fragmentBinding.textViewErr.visibility = View.GONE
+                        _fragmentBinding.progressBar.visibility = View.VISIBLE
+                        _fragmentBinding.card.visibility = View.VISIBLE
+                        _fragmentBinding.title.visibility = View.GONE
+                        _fragmentBinding.degree.visibility = View.GONE
+                        _fragmentBinding.description.visibility = View.GONE
+                        _fragmentBinding.textViewErr.visibility = View.GONE
                     }else if (data.error.isNotEmpty()){
-                        fragmentBinding.textViewErr.visibility = View.VISIBLE
-                        fragmentBinding.card.visibility = View.GONE
-                        fragmentBinding.progressBar.visibility = View.GONE
+                        _fragmentBinding.textViewErr.visibility = View.VISIBLE
+                        _fragmentBinding.card.visibility = View.GONE
+                        _fragmentBinding.progressBar.visibility = View.GONE
                     }
                     else{
-                        fragmentBinding.progressBar.visibility = View.GONE
-                        fragmentBinding.textViewErr.visibility = View.GONE
-                        fragmentBinding.card.visibility = View.VISIBLE
-                        fragmentBinding.title.visibility = View.VISIBLE
-                        fragmentBinding.degree.visibility = View.VISIBLE
-                        fragmentBinding.description.visibility = View.VISIBLE
-                        fragmentBinding.title.text = "Şehir: ${data.weather?.name}"
-                        fragmentBinding.degree.text = "Hava sıcaklığı: ${data.weather?.main?.temp.toString().take(2)}°"
-                        fragmentBinding.description.text = "Hissedilen sıcaklık: ${data.weather?.main?.feels_like.toString().take(2)}°"
+                        _fragmentBinding.progressBar.visibility = View.GONE
+                        _fragmentBinding.textViewErr.visibility = View.GONE
+                        _fragmentBinding.card.visibility = View.VISIBLE
+                        _fragmentBinding.title.visibility = View.VISIBLE
+                        _fragmentBinding.degree.visibility = View.VISIBLE
+                        _fragmentBinding.description.visibility = View.VISIBLE
+                        _fragmentBinding.title.text = "Şehir: ${data.weather?.name}"
+                        _fragmentBinding.degree.text = "Hava sıcaklığı: ${data.weather?.main?.temp.toString().take(2)}°"
+                        _fragmentBinding.description.text = "Hissedilen sıcaklık: ${data.weather?.main?.feels_like.toString().take(2)}°"
                         if (data.weather?.weather?.get(0)?.id!! < 600 && Calendar.HOUR_OF_DAY>= 19 || Calendar.HOUR_OF_DAY <=5){
-                            fragmentBinding.image.setImageResource(R.drawable.night)
+                            _fragmentBinding.image.setImageResource(R.drawable.night)
                         }else if (data.weather.weather[0].id< 600 ){
-                            fragmentBinding.image.setImageResource(R.drawable.cloudy)
+                            _fragmentBinding.image.setImageResource(R.drawable.cloudy)
                         }else if (Calendar.HOUR_OF_DAY>= 19 || Calendar.HOUR_OF_DAY <=5){
-                            fragmentBinding.image.setImageResource(R.drawable.night)
+                            _fragmentBinding.image.setImageResource(R.drawable.night)
                         }
                         else{
-                            fragmentBinding.image.setImageResource(R.drawable.sunny)
+                            _fragmentBinding.image.setImageResource(R.drawable.sunny)
                         }
                     }
                 }
@@ -131,5 +128,4 @@ class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextL
         Log.e("change", newText.toString(), )
         return false
     }
-
 }

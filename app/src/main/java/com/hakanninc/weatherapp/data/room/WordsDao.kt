@@ -15,9 +15,6 @@ interface WordsDao {
     @Query("SELECT * FROM words")
     suspend fun getAllWords() : List<Words>
 
-    @Query("SELECT * FROM words where uuid = :wordsId")
-    suspend fun getWords(wordsId: Int) : Words
-
     @Delete
     suspend fun deleteWords(words: Words)
 }

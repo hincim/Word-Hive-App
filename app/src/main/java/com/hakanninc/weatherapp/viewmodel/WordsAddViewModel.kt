@@ -42,6 +42,4 @@ class WordsAddViewModel(application: Application): BaseViewModel(application) {
            dao.deleteWords(words)
        }
     }
-
-
 }

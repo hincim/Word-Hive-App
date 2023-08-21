@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.WordAddFragment">
@@ -9,6 +10,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/engName"
         android:layout_width="0dp"
+        android:background="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="300dp"
@@ -19,8 +21,10 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEng"
+            android:background="@color/teal_700"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/teal_700"
             android:hint="İngilizce" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -29,6 +33,7 @@
         android:id="@+id/turkishName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
@@ -39,7 +44,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextTurkish"
             android:layout_width="match_parent"
+            android:background="@color/teal_700"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
             android:hint="Türkçe" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,6 +58,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
         android:text="Kaydet"
+        android:textColor="@android:color/white"
         app:backgroundTint="#009688"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

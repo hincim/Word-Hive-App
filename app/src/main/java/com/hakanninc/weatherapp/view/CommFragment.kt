@@ -10,7 +10,7 @@ import com.hakanninc.weatherapp.databinding.FragmentCommBinding
 
 class CommFragment : Fragment(R.layout.fragment_comm) {
 
-    private var fragmentBinding: FragmentCommBinding? = null
+    private var _fragmentBinding: FragmentCommBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,8 +19,13 @@ class CommFragment : Fragment(R.layout.fragment_comm) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentCommBinding.bind(view)
-        fragmentBinding = binding
+        _fragmentBinding = binding
 
+    }
+
+    override fun onDestroy() {
+        _fragmentBinding = null
+        super.onDestroy()
     }
 
 }
