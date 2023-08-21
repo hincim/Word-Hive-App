@@ -12,10 +12,10 @@ interface WordsDao {
     @Insert
     suspend fun insertAll(vararg words: Words): List<Long>
 
-    @Query("SELECT * FROM words")
+    @Query("SELECT * FROM words ORDER BY eng ASC")
     suspend fun getAllWords() : List<Words>
 
-    @Query("SELECT * FROM words WHERE eng LIKE '%' || :word ||'%' OR tr LIKE '%' || :word ||'%'")
+    @Query("SELECT * FROM words WHERE eng LIKE '%' || :word ||'%' OR tr LIKE '%' || :word ||'%' ORDER BY eng ASC")
     suspend fun getWordBySearch(word: String): List<Words>
 
     @Delete

@@ -3,6 +3,7 @@ package com.hakanninc.weatherapp.view
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -12,6 +13,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,8 +44,18 @@ class WordsFragment : Fragment(R.layout.fragment_words), SearchView.OnQueryTextL
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val layoutPosition = viewHolder.layoutPosition
             val selectedWords = wordsAdapter.words[layoutPosition]
-            viewModel.deleteWords(selectedWords)
-            subscribeToObserves()
+
+            val design = AlertDialog.Builder(requireContext())
+            design.setMessage("${selectedWords.engWord} silinsin mi?")
+            design.setPositiveButton("Evet"){ _, _ ->
+                viewModel.deleteWords(selectedWords)
+                subscribeToObserves()
+                wordsAdapter.notifyDataSetChanged()
+            }
+            design.setNegativeButton("İptal"){_, _ ->
+                wordsAdapter.notifyDataSetChanged()
+            }
+           design.create().show()
         }
 
     }
@@ -61,8 +73,6 @@ class WordsFragment : Fragment(R.layout.fragment_words), SearchView.OnQueryTextL
         binding.rv.adapter = wordsAdapter
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
         ItemTouchHelper(swipeCallBack).attachToRecyclerView(binding.rv)
-
-
 
         binding.fab.setOnClickListener {
             Navigation.findNavController(it)
@@ -94,7 +104,6 @@ class WordsFragment : Fragment(R.layout.fragment_words), SearchView.OnQueryTextL
             it?.let {
                 wordsAdapter.words = it
             }
-            wordsAdapter.notifyDataSetChanged()
         })
     }
 
@@ -106,14 +115,12 @@ class WordsFragment : Fragment(R.layout.fragment_words), SearchView.OnQueryTextL
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (query != null) {
             if (query.isEmpty())
-                Log.e("submit", query.toString())
             viewModel.getWordBySearch(query)
         }
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        Log.e("change", newText.toString())
         if (newText != null) {
             viewModel.getWordBySearch(newText)
         }

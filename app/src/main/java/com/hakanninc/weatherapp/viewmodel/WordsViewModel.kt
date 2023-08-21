@@ -47,6 +47,7 @@ class WordsViewModel(application: Application): BaseViewModel(application) {
        launch {
            val dao = WordsDatabase(getApplication()).wordsDao()
            dao.deleteWords(words)
+           getDataFromSQLite()
        }
     }
 }

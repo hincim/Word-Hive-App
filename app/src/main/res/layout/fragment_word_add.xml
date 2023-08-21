@@ -10,26 +10,49 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/engName"
         android:layout_width="0dp"
-        android:background="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="300dp"
         android:layout_marginEnd="32dp"
+        android:background="@color/white"
+        app:hintTextColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEng"
-            android:background="@color/teal_700"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/teal_700"
-            android:hint="İngilizce" />
+            android:background="@color/teal_700"
+            android:hint="İngilizce"
+            android:textColorHint="@color/teal_700" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/turkishName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="49dp"
+        android:background="@color/white"
+        app:hintTextColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/engName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextTurkish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/teal_700"
+            android:hint="Türkçe"
+            android:textColorHint="@color/teal_700" />
+    </com.google.android.material.textfield.TextInputLayout>
+   <!-- <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/turkishName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -48,7 +71,7 @@
             android:layout_height="wrap_content"
             android:textColorHint="@color/white"
             android:hint="Türkçe" />
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>-->
 
     <Button
         android:id="@+id/buttonSave"
@@ -60,6 +83,8 @@
         android:text="Kaydet"
         android:textColor="@android:color/white"
         app:backgroundTint="#009688"
+        android:background="@color/white"
+        app:hintTextColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

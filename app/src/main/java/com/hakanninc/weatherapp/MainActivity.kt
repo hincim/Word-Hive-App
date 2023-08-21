@@ -33,9 +33,7 @@ class MainActivity: AppCompatActivity(){
 
         binding.bottomNav.visibility = View.GONE
         object : CountDownTimer(2000,1000){
-            override fun onTick(p0: Long) {
-
-            }
+            override fun onTick(p0: Long) {}
 
             override fun onFinish() {
                 binding.bottomNav.visibility = View.VISIBLE
