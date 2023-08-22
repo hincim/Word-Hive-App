@@ -1,18 +1,18 @@
 package com.hakanninc.weatherapp.view
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.hakanninc.weatherapp.R
 import com.hakanninc.weatherapp.databinding.FragmentToolsBinding
 import com.hakanninc.weatherapp.viewmodel.WeatherViewModel
@@ -62,12 +62,14 @@ class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextL
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[WeatherViewModel::class.java]
 
-            getData()
+        getData()
 
         println(Calendar.HOUR_OF_DAY)
 
         _fragmentBinding.swipeRefreshLayout.setOnRefreshListener {
             _fragmentBinding.progressBar.visibility = View.VISIBLE
+            _fragmentBinding.textViewErr.visibility = View.GONE
+            _fragmentBinding.textViewNoInternet.visibility = View.GONE
             _fragmentBinding.title.visibility = View.GONE
             _fragmentBinding.degree.visibility = View.GONE
             _fragmentBinding.description.visibility = View.GONE
@@ -88,14 +90,22 @@ class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextL
                         _fragmentBinding.degree.visibility = View.GONE
                         _fragmentBinding.description.visibility = View.GONE
                         _fragmentBinding.textViewErr.visibility = View.GONE
-                    }else if (data.error.isNotEmpty()){
+                        _fragmentBinding.textViewNoInternet.visibility = View.GONE
+                    }else if (data.error == "No internet connection"){
+                        _fragmentBinding.textViewErr.visibility = View.GONE
+                        _fragmentBinding.textViewNoInternet.visibility = View.VISIBLE
+                        _fragmentBinding.card.visibility = View.GONE
+                        _fragmentBinding.progressBar.visibility = View.GONE
+                    }else if (data.error == "Error"){
                         _fragmentBinding.textViewErr.visibility = View.VISIBLE
+                        _fragmentBinding.textViewNoInternet.visibility = View.GONE
                         _fragmentBinding.card.visibility = View.GONE
                         _fragmentBinding.progressBar.visibility = View.GONE
                     }
                     else{
                         _fragmentBinding.progressBar.visibility = View.GONE
                         _fragmentBinding.textViewErr.visibility = View.GONE
+                        _fragmentBinding.textViewNoInternet.visibility = View.GONE
                         _fragmentBinding.card.visibility = View.VISIBLE
                         _fragmentBinding.title.visibility = View.VISIBLE
                         _fragmentBinding.degree.visibility = View.VISIBLE
@@ -103,14 +113,6 @@ class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextL
                         _fragmentBinding.title.text = "Şehir: ${data.weather?.name}"
                         _fragmentBinding.degree.text = "Hava sıcaklığı: ${data.weather?.main?.temp.toString().take(2)}°"
                         _fragmentBinding.description.text = "Hissedilen sıcaklık: ${data.weather?.main?.feels_like.toString().take(2)}°"
-                       /* if (Calendar.HOUR_OF_DAY>= 19 || Calendar.HOUR_OF_DAY <=5){
-                            _fragmentBinding.image.setImageResource(R.drawable.night)
-                        }else if (data.weather?.weather?.get(0)?.id!!< 600 ){
-                            _fragmentBinding.image.setImageResource(R.drawable.cloudy)
-                        }
-                        else{
-                            _fragmentBinding.image.setImageResource(R.drawable.sunny)
-                        }*/
                     }
                 }
 

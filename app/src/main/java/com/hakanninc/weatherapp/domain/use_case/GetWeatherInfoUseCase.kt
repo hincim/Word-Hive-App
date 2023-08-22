@@ -22,9 +22,12 @@ class GetWeatherInfoUseCase @Inject constructor(
                 emit(Resource.Error("No data"))
             }
         }catch (e: IOError){
-            emit(Resource.Error(message = "No internet connection"))
+            emit(Resource.Error(message = "Error"))
         }catch (e: HttpException){
             emit(Resource.Error(message = "Error"))
+        }
+        catch (e: Exception){
+            emit(Resource.Error(message = "No internet connection"))
         }
     }
 }

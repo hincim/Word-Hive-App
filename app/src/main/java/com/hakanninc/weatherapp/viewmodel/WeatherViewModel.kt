@@ -1,5 +1,7 @@
 package com.hakanninc.weatherapp.viewmodel
 
+import android.content.Context
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,25 +39,6 @@ class WeatherViewModel @Inject constructor(
 
     private var job: Job? = null
 
-    private fun getWeather(city: String){
-
-        job?.cancel()
-
-        job = getWeatherUseCase.executeGetWeather(city).onEach{
-
-            when(it){
-                is Resource.Success ->{
-                    _state.value = WeatherState(weather = it.data?: emptyList())
-                }
-                is Resource.Loading ->{
-                    _state.value = _state.value?.copy(isLoading = true)
-                }
-                is Resource.Error ->{
-                    _state.value = WeatherState(error = "Error")
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
     fun getWeatherInfo(city: String){
 
         job?.cancel()
@@ -70,7 +53,11 @@ class WeatherViewModel @Inject constructor(
                     _stateDetail.value = _stateDetail.value?.copy(isLoading = true)
                 }
                 is Resource.Error ->{
-                    _stateDetail.value = WeatherDetailState(error = "Error")
+                    if (it.message == "No internet connection"){
+                        _stateDetail.value = WeatherDetailState(error = "No internet connection")
+                    }else{
+                        _stateDetail.value = WeatherDetailState(error = "Error")
+                    }
                 }
             }
         }.launchIn(viewModelScope)
