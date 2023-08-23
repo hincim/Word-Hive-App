@@ -20,6 +20,7 @@ class WordAddFragment : Fragment(R.layout.fragment_word_add) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,10 +28,8 @@ class WordAddFragment : Fragment(R.layout.fragment_word_add) {
         val binding = FragmentWordAddBinding.bind(view)
         _fragmentBinding = binding
 
-
-        ObjectAnimator.ofFloat(binding.welcomeBack,"alpha",0.0f,1.0f).apply {
-            duration = 600
-
+        ObjectAnimator.ofFloat(binding.welcomeBack,"alpha",-3.0f,1.0f).apply {
+            duration = 1000
         }.start()
 
         viewModel = ViewModelProvider(requireActivity())[WordsViewModel::class.java]

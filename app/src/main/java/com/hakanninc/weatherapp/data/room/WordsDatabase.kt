@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.hakanninc.weatherapp.domain.model.Words
 
-@Database(entities = [Words::class], version = 1)
+@Database(entities = arrayOf(Words::class), version = 1)
 abstract class WordsDatabase: RoomDatabase() {
 
     abstract fun wordsDao() : WordsDao

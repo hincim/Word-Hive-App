@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.animation.BounceInterpolator
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.hakanninc.weatherapp.MainActivity
