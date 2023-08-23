@@ -1,8 +1,14 @@
 package com.hakanninc.weatherapp.view
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Message
 import android.util.Log
 import android.view.*
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hakanninc.weatherapp.R
 import com.hakanninc.weatherapp.adapter.WordsAdapter
 import com.hakanninc.weatherapp.databinding.FragmentWordsBinding
+import com.hakanninc.weatherapp.domain.model.Words
 import com.hakanninc.weatherapp.viewmodel.WordsViewModel
 
 
@@ -45,7 +52,9 @@ class WordsFragment : Fragment(R.layout.fragment_words), SearchView.OnQueryTextL
             val layoutPosition = viewHolder.layoutPosition
             val selectedWords = wordsAdapter.words[layoutPosition]
 
-            val design = AlertDialog.Builder(requireContext())
+            showCustomDialogBox(selectedWords)
+
+           /* val design = AlertDialog.Builder(requireContext(),)
             design.setMessage("${selectedWords.engWord} silinsin mi?")
             design.setPositiveButton("Evet"){ _, _ ->
                 viewModel.deleteWords(selectedWords)
@@ -55,7 +64,7 @@ class WordsFragment : Fragment(R.layout.fragment_words), SearchView.OnQueryTextL
             design.setNegativeButton("İptal"){_, _ ->
                 wordsAdapter.notifyDataSetChanged()
             }
-           design.create().show()
+           design.create().show()*/
         }
 
     }
@@ -66,7 +75,6 @@ class WordsFragment : Fragment(R.layout.fragment_words), SearchView.OnQueryTextL
 
         val binding = FragmentWordsBinding.bind(view)
         _fragmentBinding = binding
-        binding.toolbar.title = "Kelimeler"
 
         subscribeToObserves()
 
@@ -79,7 +87,6 @@ class WordsFragment : Fragment(R.layout.fragment_words), SearchView.OnQueryTextL
                 .navigate(WordsFragmentDirections.actionListAddFragmentToWordAddFragment())
         }
 
-        binding.toolbar.title = "Kelimeler"
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         requireActivity().addMenuProvider(object : MenuProvider{
@@ -126,4 +133,38 @@ class WordsFragment : Fragment(R.layout.fragment_words), SearchView.OnQueryTextL
         }
         return true
     }
+
+    private fun showCustomDialogBox(selectedWords: Words){
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.layout_custom_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val message: TextView = dialog.findViewById(R.id.message)
+        val btnYes: Button = dialog.findViewById(R.id.btnYes)
+        val btnCancel: Button = dialog.findViewById(R.id.btnCancel)
+
+        message.text = "${selectedWords.engWord} silinsin mi?"
+
+        btnYes.setOnClickListener {
+            viewModel.deleteWords(selectedWords)
+            subscribeToObserves()
+            wordsAdapter.notifyDataSetChanged()
+            dialog.dismiss()
+        }
+
+        btnCancel.setOnClickListener {
+            wordsAdapter.notifyDataSetChanged()
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
 }
+
+
+
+
+
+
+

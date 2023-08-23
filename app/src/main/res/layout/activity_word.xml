@@ -17,5 +17,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_list_add" />
+        app:navGraph="@navigation/nav_word_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>
