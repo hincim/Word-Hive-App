@@ -1,4 +1,4 @@
-package com.hakanninc.weatherapp.data.remote.dto.tdk_api
+package com.hakanninc.weatherapp.data.remote.dto.tdk
 
 data class OrneklerListe(
     val anlam_id: String,

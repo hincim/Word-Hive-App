@@ -1,4 +1,6 @@
-package com.hakanninc.weatherapp.data.remote.dto.tdk_api
+package com.hakanninc.weatherapp.data.remote.dto.tdk
+
+import com.hakanninc.weatherapp.domain.model.TdkWord
 
 data class TdkDtoItem(
     val anlam_gor: String,
@@ -27,3 +29,4 @@ data class TdkDtoItem(
     val telaffuz: Any,
     val telaffuz_html: Any
 )
+

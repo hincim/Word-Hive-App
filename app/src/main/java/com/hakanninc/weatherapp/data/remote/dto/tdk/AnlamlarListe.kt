@@ -1,4 +1,6 @@
-package com.hakanninc.weatherapp.data.remote.dto.tdk_api
+package com.hakanninc.weatherapp.data.remote.dto.tdk
+
+import com.hakanninc.weatherapp.domain.model.TdkWord
 
 data class AnlamlarListe(
     val anlam: String,
@@ -14,3 +16,7 @@ data class AnlamlarListe(
     val ozelliklerListe: List<OzelliklerListe>,
     val tipkes: String
 )
+
+fun AnlamlarListe.toTdkList() :TdkWord {
+    return TdkWord(anlam)
+}
