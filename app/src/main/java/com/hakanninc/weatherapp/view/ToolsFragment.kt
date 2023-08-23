@@ -1,136 +1,34 @@
 package com.hakanninc.weatherapp.view
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
-import android.util.Log
-import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.MenuProvider
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.hakanninc.weatherapp.R
+import com.hakanninc.weatherapp.databinding.FragmentHomeBinding
 import com.hakanninc.weatherapp.databinding.FragmentToolsBinding
-import com.hakanninc.weatherapp.viewmodel.WeatherViewModel
-import java.util.*
+import com.hakanninc.weatherapp.viewmodel.TdkViewModel
 
+class ToolsFragment : Fragment(R.layout.fragment_tools) {
 
-class ToolsFragment : Fragment(R.layout.fragment_tools), SearchView.OnQueryTextListener {
-
-    private lateinit var _fragmentBinding: FragmentToolsBinding
-    private lateinit var viewModel: WeatherViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        _fragmentBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_tools,container,false)
-
-        _fragmentBinding.toolbarTools.title = "Araçlar"
-        (activity as AppCompatActivity).setSupportActionBar(_fragmentBinding.toolbarTools)
-
-        requireActivity().addMenuProvider(object :MenuProvider{
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-
-                menuInflater.inflate(R.menu.menu_search,menu)
-                val item = menu.findItem(R.id.action_search).actionView as SearchView
-                item.setOnQueryTextListener(this@ToolsFragment)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return false
-            }
-
-        },viewLifecycleOwner, Lifecycle.State.RESUMED)
-        return _fragmentBinding.root
-
-
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var _fragmentBinding: FragmentToolsBinding? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[WeatherViewModel::class.java]
+        val binding = FragmentToolsBinding.bind(view)
+        _fragmentBinding = binding
 
-        getData()
-
-        println(Calendar.HOUR_OF_DAY)
-
-        _fragmentBinding.swipeRefreshLayout.setOnRefreshListener {
-            _fragmentBinding.progressBar.visibility = View.VISIBLE
-            _fragmentBinding.textViewErr.visibility = View.GONE
-            _fragmentBinding.textViewNoInternet.visibility = View.GONE
-            _fragmentBinding.title.visibility = View.GONE
-            _fragmentBinding.degree.visibility = View.GONE
-            _fragmentBinding.description.visibility = View.GONE
-            getData()
-            _fragmentBinding.swipeRefreshLayout.isRefreshing = false
+        binding.cardWeather.setOnClickListener {
+            findNavController().navigate(ToolsFragmentDirections.actionToolsFragmentToWeatherInfoFragment())
         }
-    }
-
-    private fun getData(){
-        viewModel.stateDetail.observe(viewLifecycleOwner, Observer {
-
-            it?.let { data ->
-                _fragmentBinding.let {
-                    if (data.isLoading){
-                        _fragmentBinding.progressBar.visibility = View.VISIBLE
-                        _fragmentBinding.card.visibility = View.VISIBLE
-                        _fragmentBinding.title.visibility = View.GONE
-                        _fragmentBinding.degree.visibility = View.GONE
-                        _fragmentBinding.description.visibility = View.GONE
-                        _fragmentBinding.textViewErr.visibility = View.GONE
-                        _fragmentBinding.textViewNoInternet.visibility = View.GONE
-                    }else if (data.error == "No internet connection"){
-                        _fragmentBinding.textViewErr.visibility = View.GONE
-                        _fragmentBinding.textViewNoInternet.visibility = View.VISIBLE
-                        _fragmentBinding.card.visibility = View.GONE
-                        _fragmentBinding.progressBar.visibility = View.GONE
-                    }else if (data.error == "Error"){
-                        _fragmentBinding.textViewErr.visibility = View.VISIBLE
-                        _fragmentBinding.textViewNoInternet.visibility = View.GONE
-                        _fragmentBinding.card.visibility = View.GONE
-                        _fragmentBinding.progressBar.visibility = View.GONE
-                    }
-                    else{
-                        _fragmentBinding.progressBar.visibility = View.GONE
-                        _fragmentBinding.textViewErr.visibility = View.GONE
-                        _fragmentBinding.textViewNoInternet.visibility = View.GONE
-                        _fragmentBinding.card.visibility = View.VISIBLE
-                        _fragmentBinding.title.visibility = View.VISIBLE
-                        _fragmentBinding.degree.visibility = View.VISIBLE
-                        _fragmentBinding.description.visibility = View.VISIBLE
-                        _fragmentBinding.title.text = "Şehir: ${data.weather?.name}"
-                        _fragmentBinding.degree.text = "Hava sıcaklığı: ${data.weather?.main?.temp.toString().take(2)}°"
-                        _fragmentBinding.description.text = "Hissedilen sıcaklık: ${data.weather?.main?.feels_like.toString().take(2)}°"
-                    }
-                }
-
-            }
-        })
-    }
-
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        if (query != null) {
-            if (query.isEmpty())
-                Log.e("submit", query.toString(), )
-            viewModel.getWeatherInfo(query)
+        binding.cardMean.setOnClickListener {
+            findNavController().navigate(ToolsFragmentDirections.actionToolsFragmentToWordMeanFragment())
         }
-        return true
-    }
 
-    override fun onQueryTextChange(newText: String?): Boolean {
-        Log.e("change", newText.toString(), )
-        return false
     }
 }

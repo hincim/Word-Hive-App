@@ -10,6 +10,7 @@ import com.hakanninc.weatherapp.domain.use_case.GetTdkMeanUseCase
 import com.hakanninc.weatherapp.state.WeatherState
 import com.hakanninc.weatherapp.state.WordsState
 import com.hakanninc.weatherapp.util.Resource
+import com.hakanninc.weatherapp.util.capitalizeFirstLetter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
@@ -26,17 +27,22 @@ class TdkViewModel @Inject constructor(
     val state: LiveData<WordsState>
         get() = _state
 
+    private val _searchName = MutableLiveData<String>()
+    val searchName: LiveData<String>
+        get() = _searchName
+
     private var job: Job? = null
 
     init {
-        getWordMean("üniversite")
+        getWordMean("")
     }
 
-    private fun getWordMean(searchQuery:String){
-
+    fun getWordMean(searchQuery:String){
+        _searchName.value = searchQuery.capitalizeFirstLetter()
         job?.cancel()
 
         job = getTdkMeanUseCase.executeGetTdkMean(searchQuery).onEach {
+
             when(it){
                 is Resource.Success ->{
                     _state.value = WordsState(mean = it.data)

@@ -7,12 +7,11 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.hakanninc.weatherapp.view.HomeFragment"
-        android:label="fragment_tools"
+        android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/toolsFragment"
-        android:name="com.hakanninc.weatherapp.view.ToolsFragment"
-        android:label="HomeFragment" />
+        android:id="@+id/weatherInfoFragment"
+        android:name="com.hakanninc.weatherapp.view.WeatherInfoFragment" />
     <fragment
         android:id="@+id/commFragment"
         android:name="com.hakanninc.weatherapp.view.CommFragment"
@@ -25,12 +24,23 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/toolsFragment"
+        android:name="com.hakanninc.weatherapp.view.ToolsFragment"
+        android:label="fragment_tools"
+        tools:layout="@layout/fragment_tools" >
+        <action
+            android:id="@+id/action_toolsFragment_to_weatherInfoFragment"
+            app:destination="@id/weatherInfoFragment" />
+        <action
+            android:id="@+id/action_toolsFragment_to_wordMeanFragment"
+            app:destination="@id/wordMeanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wordMeanFragment"
+        android:name="com.hakanninc.weatherapp.view.WordMeanFragment"
+        android:label="fragment_word_mean"
+        tools:layout="@layout/fragment_word_mean" />
 </navigation>

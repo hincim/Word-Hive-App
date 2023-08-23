@@ -19,14 +19,17 @@ class GetTdkMeanUseCase @Inject constructor(
             emit(Resource.Loading())
             val wordMean = repo.getMean(searchQuery)
             if (wordMean[0].anlamlarListe[0].anlam != null){
-                emit(Resource.Success(wordMean[0].anlamlarListe[0].toTdkList()))
+                emit(Resource.Success(wordMean[1].anlamlarListe[0].toTdkList()))
             }else{
-                emit(Resource.Error("No movie found"))
+                emit(Resource.Error("No data"))
             }
         }catch (e: IOError){
             emit(Resource.Error(message = "No internet connection"))
         }catch (e: HttpException){
             emit(Resource.Error(message = "Error"))
+        }
+        catch (e: Exception){
+            emit(Resource.Error(message = "No internet connection"))
         }
 
     }

@@ -1,7 +1,5 @@
 package com.hakanninc.weatherapp.viewmodel
 
-import android.content.Context
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +9,6 @@ import com.hakanninc.weatherapp.domain.use_case.GetWeatherUseCase
 import com.hakanninc.weatherapp.state.WeatherDetailState
 import com.hakanninc.weatherapp.state.WeatherState
 import com.hakanninc.weatherapp.util.Resource
-import com.hakanninc.weatherapp.view.ToolsFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn

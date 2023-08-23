@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ToolsFragment">
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rootLayout"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_tools"
-            android:layout_width="match_parent"
+            android:id="@+id/toolbar_comm"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/teal_700"
+            android:background="@color/white"
             android:elevation="10dp"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
@@ -20,107 +24,123 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_tools"
-            tools:context=".view.MainActivity">
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_weather"
+            android:layout_width="406dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:elevation="100dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:cardBackgroundColor="#009688"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_comm">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:background="@color/white"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:elevation="10dp">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/text_weather"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/white"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <ProgressBar
-                            android:id="@+id/progressBar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center">
-
-                        </ProgressBar>
-
-                        <TextView
-                            android:id="@+id/title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/degree"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@android:color/black"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/description"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@android:color/black"
-                            android:textSize="14sp" />
-
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:id="@+id/textViewErr"
-                    android:layout_width="157dp"
-                    android:layout_height="53dp"
-                    android:layout_marginTop="87dp"
-                    android:text="Veri yok"
+                    android:layout_margin="15dp"
+                    android:text="İstediğin yerin hava durumu bilgisini öğren"
                     android:textAlignment="center"
-                    android:textSize="20sp"
-                    android:visibility="gone"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/card" />
-                <TextView
-                    android:id="@+id/textViewNoInternet"
-                    android:layout_width="157dp"
-                    android:layout_height="53dp"
-                    android:layout_marginTop="87dp"
-                    android:text="İnternet bağlantısı yok"
-                    android:textAlignment="center"
-                    android:textSize="20sp"
-                    android:visibility="gone"
-                    android:textColor="@android:color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/card" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.186">
 
-
+                </TextView>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_mean"
+            android:layout_width="406dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:elevation="100dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:cardBackgroundColor="#009688"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_weather">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="10dp">
+
+                <TextView
+                    android:id="@+id/text_mean"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="Türkçe Sözlük"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.186">
+
+                </TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="58dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="10dp"
+            android:src="@drawable/app_logo"
+            app:layout_constraintBottom_toTopOf="@+id/card_weather"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar_comm"
+            app:layout_constraintStart_toStartOf="@+id/toolbar_comm"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+
+
+</FrameLayout>
+
+
+
+
+
+
+
+
+
+
+
