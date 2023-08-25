@@ -1,5 +1,7 @@
 package com.hakanninc.weatherapp.domain.use_case
 
+import com.hakanninc.weatherapp.data.remote.dto.tdk.AnlamlarListe
+import com.hakanninc.weatherapp.data.remote.dto.tdk.TdkDto
 import com.hakanninc.weatherapp.data.remote.dto.tdk.toTdkList
 import com.hakanninc.weatherapp.domain.model.TdkWord
 import com.hakanninc.weatherapp.domain.repo.TdkRepo
@@ -14,12 +16,12 @@ import javax.inject.Inject
 class GetTdkMeanUseCase @Inject constructor(
     private val repo: TdkRepo
 ) {
-    fun executeGetTdkMean(searchQuery: String) : Flow<Resource<TdkWord>> = flow{
+    fun executeGetTdkMean(searchQuery: String) : Flow<Resource<TdkDto>> = flow{
         try {
             emit(Resource.Loading())
             val wordMean = repo.getMean(searchQuery)
-            if (wordMean[0].anlamlarListe[0].anlam != null){
-                emit(Resource.Success(wordMean[1].anlamlarListe[0].toTdkList()))
+            if (wordMean[0].anlamlarListe != null){
+                emit(Resource.Success(wordMean))
             }else{
                 emit(Resource.Error("No data"))
             }

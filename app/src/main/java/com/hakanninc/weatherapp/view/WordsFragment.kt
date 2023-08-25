@@ -54,17 +54,6 @@ class WordsFragment : Fragment(R.layout.fragment_words), SearchView.OnQueryTextL
 
             showCustomDialogBox(selectedWords)
 
-           /* val design = AlertDialog.Builder(requireContext(),)
-            design.setMessage("${selectedWords.engWord} silinsin mi?")
-            design.setPositiveButton("Evet"){ _, _ ->
-                viewModel.deleteWords(selectedWords)
-                subscribeToObserves()
-                wordsAdapter.notifyDataSetChanged()
-            }
-            design.setNegativeButton("İptal"){_, _ ->
-                wordsAdapter.notifyDataSetChanged()
-            }
-           design.create().show()*/
         }
 
     }

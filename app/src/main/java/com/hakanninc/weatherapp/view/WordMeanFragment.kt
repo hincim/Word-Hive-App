@@ -11,7 +11,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hakanninc.weatherapp.R
+import com.hakanninc.weatherapp.adapter.MeanAdapter
+import com.hakanninc.weatherapp.adapter.WordsAdapter
+import com.hakanninc.weatherapp.data.remote.dto.tdk.TdkDto
+import com.hakanninc.weatherapp.data.remote.dto.tdk.TdkDtoItem
 import com.hakanninc.weatherapp.databinding.FragmentWordMeanBinding
 import com.hakanninc.weatherapp.viewmodel.TdkViewModel
 import com.hakanninc.weatherapp.viewmodel.WeatherViewModel
@@ -21,6 +26,8 @@ class WordMeanFragment : Fragment(R.layout.fragment_word_mean), SearchView.OnQue
 
     private lateinit var _fragmentBinding: FragmentWordMeanBinding
     private lateinit var viewModel : TdkViewModel
+    private lateinit var meanAdapter: MeanAdapter
+    private lateinit var list: ArrayList<TdkDto>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,8 +36,8 @@ class WordMeanFragment : Fragment(R.layout.fragment_word_mean), SearchView.OnQue
     ): View {
         _fragmentBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_word_mean,container,false)
 
-        _fragmentBinding.toolbarTools.title = "Türkçe Sözlük"
-        (activity as AppCompatActivity).setSupportActionBar(_fragmentBinding.toolbarTools)
+        _fragmentBinding.toolbarMeans.title = "Türkçe Sözlük"
+        (activity as AppCompatActivity).setSupportActionBar(_fragmentBinding.toolbarMeans)
 
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -50,14 +57,20 @@ class WordMeanFragment : Fragment(R.layout.fragment_word_mean), SearchView.OnQue
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        list = ArrayList()
+
 
         viewModel = ViewModelProvider(requireActivity())[TdkViewModel::class.java]
+        meanAdapter = MeanAdapter(viewModel,list)
+        _fragmentBinding.recyclerView.adapter = meanAdapter
+        _fragmentBinding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+
         getData()
         _fragmentBinding.swipeRefreshLayout.setOnRefreshListener {
-            _fragmentBinding.progressBar.visibility = View.VISIBLE
-            _fragmentBinding.textViewErr.visibility = View.GONE
-            _fragmentBinding.textViewNoInternet.visibility = View.GONE
-            _fragmentBinding.mean.visibility = View.GONE
+            _fragmentBinding.progressBarMean.visibility = View.VISIBLE
+            _fragmentBinding.textViewNoData.visibility = View.GONE
+            _fragmentBinding.recyclerView.visibility = View.GONE
             getData()
             _fragmentBinding.swipeRefreshLayout.isRefreshing = false
         }
@@ -65,37 +78,25 @@ class WordMeanFragment : Fragment(R.layout.fragment_word_mean), SearchView.OnQue
 
     private fun getData(){
         viewModel.state.observe(viewLifecycleOwner, Observer {
-
             it?.let { data ->
-                _fragmentBinding.let {
                     if (data.isLoading){
-                        _fragmentBinding.progressBar.visibility = View.VISIBLE
-                        _fragmentBinding.card.visibility = View.VISIBLE
-                        _fragmentBinding.mean.visibility = View.GONE
-                        _fragmentBinding.textViewErr.visibility = View.GONE
-                        _fragmentBinding.textViewNoInternet.visibility = View.GONE
-                    }else if (data.error == "No internet connection"){
-                        _fragmentBinding.textViewErr.visibility = View.GONE
-                        _fragmentBinding.textViewNoInternet.visibility = View.VISIBLE
-                        _fragmentBinding.card.visibility = View.GONE
-                        _fragmentBinding.progressBar.visibility = View.GONE
+                        _fragmentBinding.progressBarMean.visibility = View.VISIBLE
+                        _fragmentBinding.textViewNoData.visibility = View.GONE
                     }else if (data.error == "Error"){
-                        _fragmentBinding.textViewErr.visibility = View.VISIBLE
-                        _fragmentBinding.textViewNoInternet.visibility = View.GONE
-                        _fragmentBinding.card.visibility = View.GONE
-                        _fragmentBinding.progressBar.visibility = View.GONE
+                        _fragmentBinding.textViewNoData.visibility = View.VISIBLE
+                        _fragmentBinding.recyclerView.visibility = View.GONE
+                        _fragmentBinding.progressBarMean.visibility = View.GONE
                     }
                     else{
-                        _fragmentBinding.progressBar.visibility = View.GONE
-                        _fragmentBinding.textViewErr.visibility = View.GONE
-                        _fragmentBinding.textViewNoInternet.visibility = View.GONE
-                        _fragmentBinding.card.visibility = View.VISIBLE
-                        _fragmentBinding.mean.visibility = View.VISIBLE
-                        _fragmentBinding.mean.text = "${viewModel.searchName.value}: ${data.mean?.anlam}"
+                        list.clear()
+                        _fragmentBinding.progressBarMean.visibility = View.GONE
+                        _fragmentBinding.textViewNoData.visibility = View.GONE
+                        _fragmentBinding.recyclerView.visibility = View.VISIBLE
+                        list.add(it.mean!!)
+                        meanAdapter.means = list
+                        meanAdapter.notifyDataSetChanged()
                     }
                 }
-
-            }
         })
     }
 

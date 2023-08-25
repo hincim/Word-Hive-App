@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hakanninc.weatherapp.data.remote.dto.tdk.TdkDtoItem
-import com.hakanninc.weatherapp.domain.repo.TdkRepo
 import com.hakanninc.weatherapp.domain.use_case.GetTdkMeanUseCase
-import com.hakanninc.weatherapp.state.WeatherState
+import com.hakanninc.weatherapp.state.WeatherDetailState
 import com.hakanninc.weatherapp.state.WordsState
 import com.hakanninc.weatherapp.util.Resource
 import com.hakanninc.weatherapp.util.capitalizeFirstLetter
@@ -15,7 +13,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

@@ -75,7 +75,7 @@ class WeatherInfoFragment : Fragment(R.layout.fragment_weather_info), SearchView
     }
 
     private fun getData(){
-        viewModel.stateDetail.observe(viewLifecycleOwner, Observer {
+        viewModel.state.observe(viewLifecycleOwner, Observer {
 
             it?.let { data ->
                 _fragmentBinding.let {

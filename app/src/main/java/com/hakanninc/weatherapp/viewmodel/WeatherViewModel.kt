@@ -22,13 +22,9 @@ class WeatherViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    private val _state = MutableLiveData<WeatherState>()
-    val state: LiveData<WeatherState>
+    private val _state = MutableLiveData<WeatherDetailState>()
+    val state: LiveData<WeatherDetailState>
         get() = _state
-
-    private val _stateDetail = MutableLiveData<WeatherDetailState>()
-    val stateDetail: LiveData<WeatherDetailState>
-        get() = _stateDetail
 
     init {
             getWeatherInfo("Konya")
@@ -44,16 +40,16 @@ class WeatherViewModel @Inject constructor(
 
             when(it){
                 is Resource.Success ->{
-                    _stateDetail.value = WeatherDetailState(weather = it.data)
+                    _state.value = WeatherDetailState(weather = it.data)
                 }
                 is Resource.Loading ->{
-                    _stateDetail.value = _stateDetail.value?.copy(isLoading = true)
+                    _state.value = _state.value?.copy(isLoading = true)
                 }
                 is Resource.Error ->{
                     if (it.message == "No internet connection"){
-                        _stateDetail.value = WeatherDetailState(error = "No internet connection")
+                        _state.value = WeatherDetailState(error = "No internet connection")
                     }else{
-                        _stateDetail.value = WeatherDetailState(error = "Error")
+                        _state.value = WeatherDetailState(error = "Error")
                     }
                 }
             }
