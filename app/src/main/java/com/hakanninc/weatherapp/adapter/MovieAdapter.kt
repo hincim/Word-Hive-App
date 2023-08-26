@@ -17,8 +17,6 @@ class MovieAdapter(var movieList: MoviesState): RecyclerView.Adapter<MovieAdapte
 
     class MovieViewHolder(val binding: ItemMovieRowBinding): RecyclerView.ViewHolder(binding.root)
 
-    private val id = 0
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = DataBindingUtil.inflate<ItemMovieRowBinding>(LayoutInflater.from(parent.context),
             R.layout.item_movie_row,parent,false)
@@ -37,7 +35,4 @@ class MovieAdapter(var movieList: MoviesState): RecyclerView.Adapter<MovieAdapte
         return movieList.movies.size
     }
 
-   /* override fun onCountryClicked(view: View) {
-        Navigation.findNavController(view).navigate(MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(movieList.movies))
-    }*/
 }

@@ -1,14 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.MovieDetailFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="selectedMovie"
+            type="com.hakanninc.weatherapp.domain.model.MovieDetail" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/white"
+        tools:context=".view.MovieDetailFragment"
+       >
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/movieImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:downloadUrl="@{selectedMovie.poster}"
+            android:minHeight="200dp"
+            android:paddingTop="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/movieNameTitle"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:paddingTop="7dp"
+            android:text="Movie Name"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movieImage">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/movieName"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movieNameTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="@{selectedMovie.title}"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movieNameTitle">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/movieYearTitle"
+            android:textColor="@color/black"
+            android:layout_width="46dp"
+            android:layout_height="32dp"
+            android:layout_below="@id/movieName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:paddingTop="7dp"
+            android:text="Year"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movieName">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/movieYear"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movieYearTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="@{selectedMovie.year}"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movieYearTitle">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/movieImdbTitle"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movieYear"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:paddingTop="7dp"
+            android:text="IMDB"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movieYear">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/movieImdb"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movieImdbTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="@{selectedMovie.imdbRating}"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movieImdbTitle">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/moviePlotTitle"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movieImdb"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:paddingTop="7dp"
+            android:text="PLOT"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movieImdb">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/moviePlot"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/moviePlotTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:text="@{selectedMovie.plot}"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/moviePlotTitle">
+
+        </TextView>
+
+    <ProgressBar
+        android:id="@+id/progressBarMovieDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ProgressBar>
+
+        <TextView
+            android:id="@+id/textViewErrorMovieDetail"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Veri yok"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

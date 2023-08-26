@@ -67,20 +67,23 @@ class MovieFragment : Fragment(R.layout.fragment_movie), SearchView.OnQueryTextL
 
         viewModel.state.observe(viewLifecycleOwner, Observer {
             it?.let { data ->
-                if (data.isLoading){
-                    _fragmentBinding.progressBarMovie.visibility = View.VISIBLE
-                    _fragmentBinding.textViewMovieNoData.visibility = View.GONE
-                }else if (data.error == "Error"){
-                    _fragmentBinding.textViewMovieNoData.visibility = View.VISIBLE
-                    _fragmentBinding.rvMovie.visibility = View.GONE
-                    _fragmentBinding.progressBarMovie.visibility = View.GONE
-                }
-                else{
-                    _fragmentBinding.progressBarMovie.visibility = View.GONE
-                    _fragmentBinding.textViewMovieNoData.visibility = View.GONE
-                    _fragmentBinding.rvMovie.visibility = View.VISIBLE
-                    movieAdapter.movieList = it
-                    movieAdapter.notifyDataSetChanged()
+                when {
+                    data.isLoading -> {
+                        _fragmentBinding.progressBarMovie.visibility = View.VISIBLE
+                        _fragmentBinding.textViewMovieNoData.visibility = View.GONE
+                    }
+                    data.error == "Error" -> {
+                        _fragmentBinding.textViewMovieNoData.visibility = View.VISIBLE
+                        _fragmentBinding.rvMovie.visibility = View.GONE
+                        _fragmentBinding.progressBarMovie.visibility = View.GONE
+                    }
+                    else -> {
+                        _fragmentBinding.progressBarMovie.visibility = View.GONE
+                        _fragmentBinding.textViewMovieNoData.visibility = View.GONE
+                        _fragmentBinding.rvMovie.visibility = View.VISIBLE
+                        movieAdapter.movieList = it
+                        movieAdapter.notifyDataSetChanged()
+                    }
                 }
 
             }
