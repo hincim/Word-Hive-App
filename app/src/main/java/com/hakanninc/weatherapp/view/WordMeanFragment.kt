@@ -65,8 +65,8 @@ class WordMeanFragment : Fragment(R.layout.fragment_word_mean), SearchView.OnQue
         _fragmentBinding.recyclerView.adapter = meanAdapter
         _fragmentBinding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-
         getData()
+
         _fragmentBinding.swipeRefreshLayout.setOnRefreshListener {
             _fragmentBinding.progressBarMean.visibility = View.VISIBLE
             _fragmentBinding.textViewNoData.visibility = View.GONE
