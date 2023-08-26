@@ -30,5 +30,9 @@ class ToolsFragment : Fragment(R.layout.fragment_tools) {
             findNavController().navigate(ToolsFragmentDirections.actionToolsFragmentToWordMeanFragment())
         }
 
+        binding.cardMovie.setOnClickListener {
+            findNavController().navigate(ToolsFragmentDirections.actionToolsFragmentToMovieFragment())
+        }
+
     }
 }

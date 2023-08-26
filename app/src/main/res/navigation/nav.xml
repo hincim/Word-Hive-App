@@ -37,10 +37,18 @@
         <action
             android:id="@+id/action_toolsFragment_to_wordMeanFragment"
             app:destination="@id/wordMeanFragment" />
+        <action
+            android:id="@+id/action_toolsFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
     </fragment>
     <fragment
         android:id="@+id/wordMeanFragment"
         android:name="com.hakanninc.weatherapp.view.WordMeanFragment"
         android:label="fragment_word_mean"
         tools:layout="@layout/fragment_word_mean" />
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.hakanninc.weatherapp.view.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie" />
 </navigation>

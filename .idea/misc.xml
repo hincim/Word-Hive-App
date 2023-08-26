@@ -26,6 +26,7 @@
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/fragment_home.xml" value="0.14583333333333334" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/fragment_list_add.xml" value="0.22" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/fragment_list_add2.xml" value="0.1381340579710145" />
+        <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/fragment_movie.xml" value="0.14743589743589744" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/fragment_splash.xml" value="0.1381340579710145" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/fragment_tools.xml" value="0.14743589743589744" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/fragment_two.xml" value="0.1796875" />
@@ -34,6 +35,7 @@
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/fragment_word_mean.xml" value="0.14743589743589744" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/fragment_words.xml" value="0.14583333333333334" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/item_mean_row.xml" value="0.14743589743589744" />
+        <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/item_movie_row.xml" value="0.14743589743589744" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/item_word_row.xml" value="0.14583333333333334" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/layout_custom_dialog.xml" value="0.14583333333333334" />
         <entry key="..\:/kotlinprojeler/WeatherApp/app/src/main/res/layout/main_activity.xml" value="0.1381340579710145" />
