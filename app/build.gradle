@@ -13,7 +13,7 @@ android {
         dataBinding true
     }
     defaultConfig {
-        applicationId "com.hakanninc.weatherapp"
+        applicationId "com.hakanninc.wordhive"
         minSdk 23
         targetSdk 33
         versionCode 1
@@ -81,4 +81,8 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+
+
+    implementation 'com.google.android.gms:play-services-ads:22.3.0'
+
 }

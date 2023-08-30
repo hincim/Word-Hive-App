@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/wordsFragment"
-        android:name="com.hakanninc.weatherapp.view.WordsFragment"
+        android:name="com.hakanninc.wordhive.view.WordsFragment"
         android:label="fragment_list_add"
         tools:layout="@layout/fragment_words" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/wordAddFragment"
-        android:name="com.hakanninc.weatherapp.view.WordAddFragment"
+        android:name="com.hakanninc.wordhive.view.WordAddFragment"
         android:label="fragment_word_add"
         tools:layout="@layout/fragment_word_add" />
 </navigation>

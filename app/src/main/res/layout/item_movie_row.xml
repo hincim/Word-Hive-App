@@ -5,7 +5,7 @@
     <data>
         <variable
             name="movie"
-            type="com.hakanninc.weatherapp.domain.model.Movie" />
+            type="com.hakanninc.wordhive.domain.model.Movie" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

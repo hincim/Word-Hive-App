@@ -6,7 +6,7 @@
     <data>
         <variable
             name="selectedMovie"
-            type="com.hakanninc.weatherapp.domain.model.MovieDetail" />
+            type="com.hakanninc.wordhive.domain.model.MovieDetail" />
     </data>
 
 
